@@ -1,0 +1,16 @@
+# Môi trường thật: truyền DB_URL, DB_USER, DB_PASSWORD qua biến môi trường
+# (ví dụ jdbc:postgresql://db:5432/payment).
+# Khi không có biến môi trường (máy local, CI), tự động dùng H2 in-memory.
+server:
+  port: 8083
+
+spring:
+  application:
+    name: payment-service
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:paymentdb}
+    username: ${DB_USER:sa}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
